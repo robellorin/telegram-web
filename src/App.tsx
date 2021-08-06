@@ -2,8 +2,17 @@ import React from 'react';
 import { Header, Footer, MessageView } from 'components';
 import { Message } from 'models';
 import './styles/global.scss';
+
+const initialData: Message[] = [
+  {
+    content: 'hi, how are you?',
+    type: 'text',
+    date: new Date(),
+    isOwner: false
+  }
+]
 function App() {
-  const [messageData, setMessageData] = React.useState<Message[]>([]);
+  const [messageData, setMessageData] = React.useState<Message[]>(initialData);
   const onHandleSendMessage = (message: Message) => {
     setMessageData([...messageData, message]);
   }

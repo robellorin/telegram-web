@@ -3,5 +3,5 @@ export interface Message {
   type: 'text' | 'emoji';
   date: Date;
   isOwner: boolean;
-  isRead: boolean;
+  isRead?: boolean;
 }
