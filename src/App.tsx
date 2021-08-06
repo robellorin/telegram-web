@@ -1,12 +1,17 @@
 import React from 'react';
-import { Header, Footer } from 'components';
+import { Header, Footer, MessageView } from 'components';
+import { Message } from 'models';
 import './styles/global.scss';
 function App() {
+  const [messageData, setMessageData] = React.useState<Message[]>([]);
+  const onHandleSendMessage = (message: Message) => {
+    console.log(message);
+  }
   return (
     <div className="flex flex-col h-screen bg-gray-800">
       <Header></Header>
-      <div className="flex-1"></div>
-      <Footer></Footer>
+      <MessageView messageData={messageData}></MessageView>
+      <Footer onHandleSendMessage={onHandleSendMessage}></Footer>
     </div>
   );
 }

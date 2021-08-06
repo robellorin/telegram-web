@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextareaAutosize, makeStyles } from '@material-ui/core';
 import { styles } from './Footer.styles';
+import { IFooterProps } from './Footer.types';
 import classNames from 'classnames';
 import { IconButton } from 'components';
 import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
@@ -10,14 +11,14 @@ import EmojiEmotionsOutlinedIcon from '@material-ui/icons/EmojiEmotionsOutlined'
 
 const useStyles = makeStyles(styles);
 
-export const Footer: React.FunctionComponent = () => {
+export const Footer: React.FunctionComponent<IFooterProps> = ({onHandleSendMessage}) => {
   const classes = useStyles();
   const [message, setMessage] = React.useState('');
   const onKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' && event.shiftKey) {
       event.persist();
       event.preventDefault();
-      console.log(message);
+      onHandleSendMessage(message);
       setMessage('');
     }
   }
