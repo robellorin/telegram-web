@@ -2,6 +2,7 @@ import React from 'react';
 import { TextareaAutosize, makeStyles } from '@material-ui/core';
 import { styles } from './Footer.styles';
 import { IFooterProps } from './Footer.types';
+import { Message } from 'models';
 import classNames from 'classnames';
 import { IconButton } from 'components';
 import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
@@ -18,7 +19,14 @@ export const Footer: React.FunctionComponent<IFooterProps> = ({onHandleSendMessa
     if (event.key === 'Enter' && event.shiftKey) {
       event.persist();
       event.preventDefault();
-      onHandleSendMessage(message);
+      const messageItem: Message = {
+        content: message,
+        type: 'text',
+        date: new Date(),
+        isOwner: true,
+        isRead: true
+      }
+      onHandleSendMessage(messageItem);
       setMessage('');
     }
   }

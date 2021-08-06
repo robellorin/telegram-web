@@ -5,7 +5,7 @@ import './styles/global.scss';
 function App() {
   const [messageData, setMessageData] = React.useState<Message[]>([]);
   const onHandleSendMessage = (message: Message) => {
-    console.log(message);
+    setMessageData([...messageData, message]);
   }
   return (
     <div className="flex flex-col h-screen bg-gray-800">

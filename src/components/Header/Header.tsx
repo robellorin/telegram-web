@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import { styles } from './Header.styles';
 import classNames from 'classnames';
 import { IconButton, Avatar } from 'components';
@@ -18,8 +18,8 @@ export const Header: React.FunctionComponent = () => {
       <div className='flex iterms-center cursor-pointer flex-nowrap overflow-hidden'>
         <Avatar firstName={FIRST_NAME} lastName={LAST_NAME}></Avatar>
         <div className='flex flex-col justify-between ml-4 overflow-hidden'>
-          <Typography className='primaryText truncate'>{`${FIRST_NAME} ${LAST_NAME}`}</Typography>
-          <Typography className='secondaryText truncate'>last seen recently</Typography>
+          <div className='primaryText truncate'>{`${FIRST_NAME} ${LAST_NAME}`}</div>
+          <div className='secondaryText truncate text-sm'>last seen recently</div>
         </div>
       </div>
       <div className="flex item-center">
