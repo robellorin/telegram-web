@@ -23,7 +23,7 @@ export const Header: React.FunctionComponent = () => {
         </div>
       </div>
       <div className="flex item-center">
-        <IconButton>
+        <IconButton >
           <PhoneOutlinedIcon></PhoneOutlinedIcon>
         </IconButton>
         <IconButton>

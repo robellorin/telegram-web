@@ -4,7 +4,7 @@ import { styles } from './Footer.styles';
 import { IFooterProps } from './Footer.types';
 import { Message } from 'models';
 import classNames from 'classnames';
-import { IconButton } from 'components';
+import { IconButton, StickerPopover } from 'components';
 import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
 import KeyboardVoiceOutlinedIcon from '@material-ui/icons/KeyboardVoiceOutlined';
 import EmojiEmotionsOutlinedIcon from '@material-ui/icons/EmojiEmotionsOutlined';
@@ -15,19 +15,22 @@ const useStyles = makeStyles(styles);
 export const Footer: React.FunctionComponent<IFooterProps> = ({onHandleSendMessage}) => {
   const classes = useStyles();
   const [message, setMessage] = React.useState('');
+
   const onKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' && event.shiftKey) {
       event.persist();
       event.preventDefault();
-      const messageItem: Message = {
-        content: message,
-        type: 'text',
-        date: new Date(),
-        isOwner: true,
-        isRead: true
+      if (message && message.length) {
+        const messageItem: Message = {
+          content: message,
+          type: 'text',
+          date: new Date(),
+          isOwner: true,
+          isRead: true
+        }
+        onHandleSendMessage(messageItem);
+        setMessage('');
       }
-      onHandleSendMessage(messageItem);
-      setMessage('');
     }
   }
 
@@ -45,7 +48,11 @@ export const Footer: React.FunctionComponent<IFooterProps> = ({onHandleSendMessa
           onChange={(event) => setMessage(event.target.value)}
         />
       </div>
-      <IconButton isSecondary>
+      <IconButton
+        isSecondary
+        isHoverPopover
+        onRenderPopoverComponent={() => (<StickerPopover />)}
+      >
         <EmojiEmotionsOutlinedIcon></EmojiEmotionsOutlinedIcon>
       </IconButton>
       <IconButton isSecondary>
