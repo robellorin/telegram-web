@@ -16,6 +16,7 @@
     "classnames": "^2.3.1",
     "cross-env": "7.x",
     "delay-cli": "^1.1.0",
+    "lottie-react": "^2.1.0",
     "moment": "^2.29.1",
     "npm-run-all": "4.x",
     "postcss": "^8.3.6",

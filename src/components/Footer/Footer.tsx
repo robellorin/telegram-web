@@ -51,7 +51,7 @@ export const Footer: React.FunctionComponent<IFooterProps> = ({onHandleSendMessa
       <IconButton
         isSecondary
         isHoverPopover
-        onRenderPopoverComponent={() => (<StickerPopover />)}
+        onRenderPopoverComponent={(props: any) => (<StickerPopover {...props} />)}
       >
         <EmojiEmotionsOutlinedIcon></EmojiEmotionsOutlinedIcon>
       </IconButton>

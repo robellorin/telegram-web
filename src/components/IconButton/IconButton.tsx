@@ -17,12 +17,24 @@ export const IconButton: React.FunctionComponent<IIconButtonProps> = ({
 }) => {
 	const classes = useStyles({ isSecondary });
 	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+	const [onPopover, setOnPopover] = React.useState(false);
+
 	const handlePopoverOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
 		setAnchorEl(event.currentTarget);
 	};
+
 	const handlePopoverClose = () => {
-		setAnchorEl(null);
+		// setTimeout(() => {
+		// 	if (!onPopover) {
+		// 		setAnchorEl(null);
+		// 	}
+		// }, 100);
 	};
+
+	const handleLeavePopover = () => {
+		// setAnchorEl(null);
+		// setOnPopover(false);
+	}
 
 	const open = Boolean(anchorEl);
 
@@ -55,9 +67,14 @@ export const IconButton: React.FunctionComponent<IIconButtonProps> = ({
 						horizontal: 'left',
 					}}
 					onClose={handlePopoverClose}
+					onMouseEnter={() => setOnPopover(true)}
+					onMouseLeave={handleLeavePopover}
 					disableRestoreFocus
 				>
-					{onRenderPopoverComponent?.()}
+					{onRenderPopoverComponent?.({
+						onMouseEnter: () => setOnPopover(true),
+						onMouseLeave: handleLeavePopover
+					})}
 				</Popover>
 			}
 		</div>

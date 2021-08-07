@@ -1,7 +1,8 @@
-import { IconButtonProps } from '@material-ui/core';
+import { IconButtonProps, BoxProps } from '@material-ui/core';
+import React from 'react';
 export interface IIconButtonProps extends Omit<IconButtonProps, 'size'> {
   className?: string;
   isSecondary?: boolean;
-  onRenderPopoverComponent?: () => React.ReactElement;
+  onRenderPopoverComponent?: (props: BoxProps) => React.ReactElement;
   isHoverPopover?: boolean;
 }
