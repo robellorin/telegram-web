@@ -24,16 +24,16 @@ export const IconButton: React.FunctionComponent<IIconButtonProps> = ({
 	};
 
 	const handlePopoverClose = () => {
-		// setTimeout(() => {
-		// 	if (!onPopover) {
-		// 		setAnchorEl(null);
-		// 	}
-		// }, 100);
+		setTimeout(() => {
+			if (!onPopover) {
+				setAnchorEl(null);
+			}
+		}, 100);
 	};
 
 	const handleLeavePopover = () => {
-		// setAnchorEl(null);
-		// setOnPopover(false);
+		setAnchorEl(null);
+		setOnPopover(false);
 	}
 
 	const open = Boolean(anchorEl);
