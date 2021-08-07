@@ -9,6 +9,19 @@ const initialData: Message[] = [
     type: 'text',
     date: new Date(),
     isOwner: false
+  },
+  {
+    content: 'smiling-girl.json',
+    type: 'sticker',
+    date: new Date(),
+    isOwner: false
+  },
+  {
+    content: 'smiling-girl.json',
+    type: 'sticker',
+    date: new Date(),
+    isOwner: true,
+    isRead: true
   }
 ]
 function App() {
