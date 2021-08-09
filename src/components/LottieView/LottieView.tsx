@@ -12,6 +12,16 @@ export const LottieView: React.FunctionComponent<ILottieViewProps> = ({stickerNa
 	const [options, setOptions] = React.useState<LottieOptions | null>(null);
 
 	React.useEffect(() => {
+		return () => {
+			setOptions({
+				animationData: {},
+				loop: false,
+				autoplay: false
+			});
+		}
+	}, []);
+
+	React.useEffect(() => {
 		if (stickerName && stickerName.length) {
 			import(`assets/stickers/${stickerName}`).then(({ default: path }) => {
 				if (path) {

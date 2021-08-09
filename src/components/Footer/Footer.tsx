@@ -4,7 +4,7 @@ import { styles } from './Footer.styles';
 import { AppContext } from 'context';
 import { Message } from 'models';
 import classNames from 'classnames';
-import { IconButton, StickerPopover } from 'components';
+import { IconButton, MediaPopover } from 'components';
 import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
 import KeyboardVoiceOutlinedIcon from '@material-ui/icons/KeyboardVoiceOutlined';
 import EmojiEmotionsOutlinedIcon from '@material-ui/icons/EmojiEmotionsOutlined';
@@ -52,7 +52,7 @@ export const Footer: React.FunctionComponent = () => {
       <IconButton
         isSecondary
         isHoverPopover
-        onRenderPopoverComponent={(props: any) => (<StickerPopover {...props} />)}
+        onRenderPopoverComponent={(props: any) => (<MediaPopover {...props} />)}
       >
         <EmojiEmotionsOutlinedIcon></EmojiEmotionsOutlinedIcon>
       </IconButton>

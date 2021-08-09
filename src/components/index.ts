@@ -5,4 +5,5 @@ export * from './Avatar';
 export * from './MessageView';
 export * from './Popover';
 export * from './LottieView';
-export * from './StickerPopover';
+export * from './MediaPopover';
+export * from './TabPanel';
