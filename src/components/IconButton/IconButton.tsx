@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { IconButton as MuiIconButton, makeStyles } from '@material-ui/core';
+import { AppContext } from 'context';
 import { styles } from './IconButton.styles';
 import { IIconButtonProps } from './IconButton.types';
 import { Popover } from 'components';
@@ -16,31 +17,34 @@ export const IconButton: React.FunctionComponent<IIconButtonProps> = ({
 	...props
 }) => {
 	const classes = useStyles({ isSecondary });
-	const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
+	const { popoverAnchorEl, setPopoverAnchorEl } = React.useContext(AppContext);
 	const [onPopover, setOnPopover] = React.useState(false);
+	const [open, setOpen] = React.useState(Boolean(popoverAnchorEl));
+
+	React.useEffect(() => {
+		setOpen(Boolean(popoverAnchorEl))
+	}, [popoverAnchorEl]);
 
 	const handlePopoverOpen = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-		setAnchorEl(event.currentTarget);
+		if (isHoverPopover)	setPopoverAnchorEl(event.currentTarget);
 	};
 
 	const handlePopoverClose = () => {
 		setTimeout(() => {
 			if (!onPopover) {
-				setAnchorEl(null);
+				setPopoverAnchorEl(null);
 			}
 		}, 100);
 	};
 
 	const handleLeavePopover = () => {
-		setAnchorEl(null);
+		setPopoverAnchorEl(null);
 		setOnPopover(false);
 	}
 
-	const open = Boolean(anchorEl);
-
 	return (
 		<div
-			aria-owns={open ? 'mouse-over-popover' : undefined}
+			aria-owns={Boolean(popoverAnchorEl) ? 'mouse-over-popover' : undefined}
 			aria-haspopup="true"
 			onMouseEnter={handlePopoverOpen}
 			onMouseLeave={handlePopoverClose}
@@ -53,11 +57,11 @@ export const IconButton: React.FunctionComponent<IIconButtonProps> = ({
 				{children}
 			</MuiIconButton>
 			{
-				isHoverPopover &&
+				isHoverPopover && popoverAnchorEl &&
 				< Popover
 					id={open ? 'mouse-over-popover' : undefined}
 					open={open}
-					anchorEl={anchorEl}
+					anchorEl={popoverAnchorEl}
 					anchorOrigin={{
 						vertical: 'top',
 						horizontal: 'left',

@@ -4,9 +4,10 @@ import noop from 'lodash/noop';
 import { Message } from 'models';
 
 interface IAppContext {
-    messageData: Message[];
-    setMessageData: (data: Message[]) => void;
-    
+  messageData: Message[];
+  setMessageData: (data: Message[]) => void;
+  popoverAnchorEl: HTMLElement | null;
+  setPopoverAnchorEl: (element: HTMLElement | null) => void;
 }
 
 const DEFAULT_STATE: IAppContext = {
@@ -31,7 +32,9 @@ const DEFAULT_STATE: IAppContext = {
       isRead: true
     }
   ],
-  setMessageData: noop
+  setMessageData: noop,
+  popoverAnchorEl: null,
+  setPopoverAnchorEl: noop
 };
 
 export const AppContext = createContext(DEFAULT_STATE);
@@ -42,14 +45,26 @@ export interface IAppProviderProps {
 
 export const AppProvider = ({ children }: IAppProviderProps) => {
   const [messageData, setMessageData] = useState(DEFAULT_STATE.messageData);
-    return (
-        <AppContext.Provider
-          value={{
-            messageData,
-            setMessageData
-          }}
-        >
-            {children}
-        </AppContext.Provider>
-    );
+  const [popoverAnchorEl, setPopoverAnchorEl] = React.useState(DEFAULT_STATE.popoverAnchorEl);
+  React.useEffect(() => {
+    const messageEnd = document.getElementById('message-end');
+    if (messageEnd) {
+      setTimeout(() => {
+        messageEnd.scrollIntoView({ behavior: "smooth" });
+        setPopoverAnchorEl(null);
+      }, 200);
+    }
+  }, [messageData]);
+  return (
+      <AppContext.Provider
+        value={{
+          messageData,
+          setMessageData,
+          popoverAnchorEl,
+          setPopoverAnchorEl
+        }}
+      >
+        {children}
+      </AppContext.Provider>
+  );
 };

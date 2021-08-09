@@ -40,7 +40,7 @@ export const MessageView: React.FunctionComponent = () => {
 						</div>
 				)})
 			}
-			<div className="float-left clear-both" ref={messagesEnd} />
+			<div id="message-end" className="float-left clear-both" ref={messagesEnd} />
 		</div>
 	);
 };
