@@ -3,13 +3,14 @@ import { makeStyles } from '@material-ui/core';
 import { styles } from './MessageView.styles';
 import moment from 'moment';
 import classNames from 'classnames';
-import { IMessageViewProps } from './MessageView.types';
+import { AppContext } from 'context';
 import { MessageRow } from 'components';
 
 const useStyles = makeStyles(styles);
 
-export const MessageView: React.FunctionComponent<IMessageViewProps> = ({ messageData }) => {
+export const MessageView: React.FunctionComponent = () => {
 	const classes = useStyles();
+	const { messageData } = React.useContext(AppContext);
 	const messagesEnd = React.useRef<HTMLDivElement>(null);
 	let lastDate = '';
 
@@ -31,7 +32,9 @@ export const MessageView: React.FunctionComponent<IMessageViewProps> = ({ messag
 						<div key={index}>
 							{
 								isNewDate &&
-								<div className={classNames(classes.infoWrapper, "flex justify-center text-white w-max mx-auto")}>{messageDate}</div>
+								<div className={classNames(classes.infoWrapper, "flex justify-center text-white w-max mx-auto")}>
+									{messageDate}
+								</div>
 							}
 							<MessageRow data={messageRow}></MessageRow>
 						</div>

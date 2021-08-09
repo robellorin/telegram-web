@@ -53,7 +53,9 @@ export const StickerPopover: React.FunctionComponent<BoxProps> = (props) => {
 		<Box className={classes.stickersWrapper} {...props}>
 			<div className="flex flex-wrap h-fit-content">
 			{
-				stickerList.map((sticker, index) => <LottieView key={index} stickerName={sticker}></LottieView>)
+				stickerList.map((sticker, index) => (
+					<LottieView key={index} stickerName={sticker}></LottieView>
+				))
 			}
 			</div>
 		</Box>

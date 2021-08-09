@@ -7,7 +7,7 @@ import { ILottieViewProps } from './LottieView.types';
 
 const useStyles = makeStyles(styles);
 
-export const LottieView: React.FunctionComponent<ILottieViewProps> = ({stickerName, className, styles}) => {
+export const LottieView: React.FunctionComponent<ILottieViewProps> = ({stickerName, className, styles, onHandleClick}) => {
 	const classes = useStyles();
 	const [options, setOptions] = React.useState<LottieOptions | null>(null);
 
@@ -27,7 +27,11 @@ export const LottieView: React.FunctionComponent<ILottieViewProps> = ({stickerNa
 
 	return (
 		options ?
-			<Lottie className={classNames(classes.root, className)} style={styles} {...options}></Lottie>
+			<Lottie
+				className={classNames(classes.root, className)} style={styles}
+				{...options}
+				onClick={() => onHandleClick?.(stickerName)}
+			></Lottie>
 		:
 			<></>
   );

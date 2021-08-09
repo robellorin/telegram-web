@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextareaAutosize, makeStyles } from '@material-ui/core';
 import { styles } from './Footer.styles';
-import { IFooterProps } from './Footer.types';
+import { AppContext } from 'context';
 import { Message } from 'models';
 import classNames from 'classnames';
 import { IconButton, StickerPopover } from 'components';
@@ -12,9 +12,10 @@ import EmojiEmotionsOutlinedIcon from '@material-ui/icons/EmojiEmotionsOutlined'
 
 const useStyles = makeStyles(styles);
 
-export const Footer: React.FunctionComponent<IFooterProps> = ({onHandleSendMessage}) => {
+export const Footer: React.FunctionComponent = () => {
   const classes = useStyles();
   const [message, setMessage] = React.useState('');
+  const { messageData, setMessageData } = React.useContext(AppContext);
 
   const onKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' && event.shiftKey) {
@@ -28,7 +29,7 @@ export const Footer: React.FunctionComponent<IFooterProps> = ({onHandleSendMessa
           isOwner: true,
           isRead: true
         }
-        onHandleSendMessage(messageItem);
+        setMessageData([...messageData, messageItem]);
         setMessage('');
       }
     }
