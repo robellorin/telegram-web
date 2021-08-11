@@ -5,6 +5,7 @@ export const TabPanel: React.FunctionComponent<ITabPanelProps> = ({children, val
 
 	return (
 		<div
+			className="h-full"
       role="tabpanel"
 			hidden={value !== index}
       {...restProps}

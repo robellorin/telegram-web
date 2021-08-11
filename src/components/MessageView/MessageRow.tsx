@@ -34,7 +34,7 @@ export const MessageRow: React.FunctionComponent<IMessageRowProps> = ({data}) =>
 			}
 			{data.type === 'sticker' &&
 				<div className={classes.stickerWrapper}>
-					<LottieView styles={{ width: 192, height: 192 }} stickerName={data.content}></LottieView>
+					<LottieView styles={{ width: 192, height: 192 }} stickerName={data.content} isMessage></LottieView>
 				<div className={classNames(classes.infoWrapper, "secondaryText absolute right-2 bottom-1 text-xs")}>
 						{
 							data.isRead && data.isOwner &&

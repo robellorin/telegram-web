@@ -1,4 +1,4 @@
-import { CSSProperties, createStyles } from '@material-ui/styles';
+import { CSSProperties, CreateCSSProperties, createStyles } from '@material-ui/styles';
 
 const wrapper: CSSProperties = {
   minHeight: 60,
@@ -26,8 +26,19 @@ const messageBox: CSSProperties = {
   }
 }
 
+const mediaWrapper: CreateCSSProperties = {
+  background: 'rgb(31, 41, 55)',
+  width: (props: any) => (props.openMediaPopover ? 340 : 0),
+  transition: 'width 0.1s',
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 70,
+  right: 10
+}
+
 export const styles = createStyles({
   wrapper,
   attachIcon,
-  messageBox
+  messageBox,
+  mediaWrapper
 });

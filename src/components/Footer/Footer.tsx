@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextareaAutosize, makeStyles } from '@material-ui/core';
+import { TextareaAutosize, Paper, makeStyles } from '@material-ui/core';
 import { styles } from './Footer.styles';
 import { AppContext } from 'context';
 import { Message } from 'models';
@@ -13,10 +13,11 @@ import EmojiEmotionsOutlinedIcon from '@material-ui/icons/EmojiEmotionsOutlined'
 const useStyles = makeStyles(styles);
 
 export const Footer: React.FunctionComponent = () => {
-  const classes = useStyles();
+  const { messageData, setMessageData, openMediaPopover, setOpenMediaPopover } = React.useContext(AppContext);
+  const classes = useStyles({openMediaPopover});
   const [message, setMessage] = React.useState('');
-  const { messageData, setMessageData } = React.useContext(AppContext);
-
+  let onPopover = false;
+  
   const onKeyPress = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' && event.shiftKey) {
       event.persist();
@@ -35,8 +36,30 @@ export const Footer: React.FunctionComponent = () => {
     }
   }
 
+  const handlePopoverClose = () => {
+    setTimeout(() => {
+			if (!onPopover) {
+        setOpenMediaPopover(false);
+			}
+		}, 200);
+	};
+
+	const handleLeavePopover = () => {
+    setOpenMediaPopover(false);
+    onPopover = false;
+	}
+
 	return (
-		<div className={classNames(classes.wrapper, 'flex items-end bg-gray-700 px-4')}>
+    <div className={classNames(classes.wrapper, 'flex items-end bg-gray-700 px-4')}>
+      <Paper
+        className={classes.mediaWrapper}
+        elevation={3}
+        onMouseEnter={() => { onPopover = true }}
+        onMouseLeave={() => handleLeavePopover()}
+        
+      >
+        <MediaPopover  />
+      </Paper>
       <IconButton className={classes.attachIcon} isSecondary>
         <AttachFileOutlinedIcon></AttachFileOutlinedIcon>
       </IconButton>
@@ -51,8 +74,8 @@ export const Footer: React.FunctionComponent = () => {
       </div>
       <IconButton
         isSecondary
-        isHoverPopover
-        onRenderPopoverComponent={(props: any) => (<MediaPopover {...props} />)}
+        onMouseEnter={() => setOpenMediaPopover(true)}
+        onMouseLeave={() => handlePopoverClose()}
       >
         <EmojiEmotionsOutlinedIcon></EmojiEmotionsOutlinedIcon>
       </IconButton>
