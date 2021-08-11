@@ -3,6 +3,5 @@ export interface ILottieViewProps {
   styles?: object;
   className?: string;
   isMessage?: boolean;
-  inView?: boolean;
   onHandleClick?: (stickerName: string) => void;
 }
