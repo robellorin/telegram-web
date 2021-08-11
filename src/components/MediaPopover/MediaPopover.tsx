@@ -3,7 +3,6 @@ import { Box, BoxProps, Tabs, Tab, makeStyles } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 import { styles } from './MediaPopover.styles';
 import { AppContext } from 'context';
-import { TabPanel } from 'components';
 import { StickerPopover } from './StickerPopover';
 
 const useStyles = makeStyles(styles);
@@ -31,11 +30,11 @@ export const MediaPopover: React.FunctionComponent<BoxProps> = (props) => {
         index={mediaType}
         onChangeIndex={(index: number) => setMediaType(index)}
 			>
-				<TabPanel value={mediaType} index={0}>Emoji</TabPanel>
-				<TabPanel value={mediaType} index={1}>
+				<div className="h-full" role="tabpanel">Emoji</div>
+				<div className="h-full" role="tabpanel">
 					<StickerPopover />
-				</TabPanel>
-				<TabPanel value={mediaType} index={2}>Gifs</TabPanel>
+				</div>
+				<div className="h-full" role="tabpanel">Gifs</div>
 			</SwipeableViews>
 		</Box>
 	);
